@@ -12,6 +12,22 @@
 
 
 all:
-	@clear && echo "==Docker==========="
+	docker-compose -f srcs/. up --no-cache
+	@clear && echo "==Docker===================="
 
-.PHONY: all
+rm_i:
+	@docker rmi -f ${docker image ls -aq}
+
+rm_c:
+	@docker rm -f ${docker container ls -aq}
+
+clean: rm_i
+	@clear && echo "==Clean_Images==============="
+
+fclean: rm_c rm_i
+	@clear && echo "==Clean_Images_&_Containers=="
+
+re: fclean all
+	@clear && echo "==Re_Build==================="
+
+.PHONY: all bonus fclean clean rm_i rm_c
