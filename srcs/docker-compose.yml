@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  nginx:
+    container_name: nginx
+    build: ./srcs/requirements/nginx
+    ports:
+      - 443:443
+    volumes:
+      - /Users/idouni/Desktop/HTML:/usr/share/nginx/html
+    restart: on-failure
+  
+  # wordpress:
+  # mariadb:
+# volumes:
+
+networks:
+  inception_net:

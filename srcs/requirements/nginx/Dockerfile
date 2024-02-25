@@ -1,10 +1,18 @@
-FROM alpine:3.19
+FROM debian:12
 
-RUN apk upgrade -y\
- && apk update -y\
- && apk add vim\
- && apk add nginx
-#  && apk add 
+RUN apt-get update -y\
+ && apt-get upgrade -y\
+ && apt-get install nginx openssl -y
 
- EXPOSE 433
+WORKDIR /etc/nginx/ssl/
 
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx.key -out nginx.crt -subj "/C=MA/ST=Khouribga/L=Byout/O=1337/CN=1337.Inception.com/OU=Byout"
+
+COPY ./nginx.conf /etc/nginx/conf.d
+
+EXPOSE 443
+
+# CMD ["nginx"]
+ENTRYPOINT [ "nginx", "-g" ]
+# CMD ["ps -a"]
+CMD ["daemon off;"]
