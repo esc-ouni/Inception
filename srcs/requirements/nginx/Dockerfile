@@ -1,5 +1,10 @@
-FROM debian:11
+FROM alpine:3.19
 
+RUN apk upgrade -y\
+ && apk update -y\
+ && apk add vim\
+ && apk add nginx
+#  && apk add 
 
-RUN apt update -yq
+ EXPOSE 433
 
