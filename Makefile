@@ -10,24 +10,23 @@
 #                                                                              #
 # **************************************************************************** #
 
-
 all:
-	docker-compose -f srcs/. up --no-cache
-	@clear && echo "==Docker===================="
+	@clear && echo "==Start======================"
+	docker-compose -f ./srcs/docker-compose.yml up
+	@echo "==Done======================="
 
 rm_i:
-	@docker rmi -f ${docker image ls -aq}
+	@docker rmi -f ${shell docker image ls -aq} || echo "Nothing_to_delete"
 
 rm_c:
-	@docker rm -f ${docker container ls -aq}
+	@docker rm -f ${shell docker container ls -aq} || echo "Nothing_to_delete"
 
-clean: rm_i
-	@clear && echo "==Clean_Images==============="
+clean: rm_c
+	@clear && echo "==Clean_Containers==============="
 
 fclean: rm_c rm_i
 	@clear && echo "==Clean_Images_&_Containers=="
 
 re: fclean all
-	@clear && echo "==Re_Build==================="
 
-.PHONY: all bonus fclean clean rm_i rm_c
+.PHONY: all fclean clean  rm_i rm_c
