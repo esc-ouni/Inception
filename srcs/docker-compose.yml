@@ -6,12 +6,25 @@ services:
     ports:
       - 443:443
     volumes:
-      - /Users/idouni/Desktop/HTML:/usr/share/nginx/html
+      - wp:/var/www/html
     restart: on-failure
+
+    networks:
+      - wordpress-network
   
-  # wordpress:
-  # mariadb:
-# volumes:
+  wordpress:
+    container_name: wordpress
+    build: ./srcs/requirements/wordpress
+    volumes:
+      - wp:/var/www/html
+    restart: on-failure
+
+    networks:
+      - wordpress-network
+
+volumes:
+  wp:
 
 networks:
-  inception_net:
+  wordpress-network:
+    driver: bridge

@@ -32,8 +32,10 @@ rm_c:
 clean: rm_c
 	@clear && echo "==Clean_Containers==============="
 
-fclean: rm_c rm_i
+fclean:
 	docker-compose -f ./srcs/docker-compose.yml down
+	$(rm_c)
+	$(rm_i)
 	@clear && echo "==Clean_Images_&_Containers=="
 
 re: fclean all
