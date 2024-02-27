@@ -29,15 +29,18 @@ rm_i:
 rm_c:
 	@docker rm -f ${shell docker container ls -aq} || echo "Nothing_to_delete"
 
+rm_v:
+	@docker volume rm -f ${shell docker volume ls -q} || echo "Nothing_to_delete"
+
 clean: rm_c
 	@clear && echo "==Clean_Containers==============="
 
-fclean:
+fclean: rm_c rm_i rm_v
 	docker-compose -f ./srcs/docker-compose.yml down
-	$(rm_c)
-	$(rm_i)
+	# $(rm_c)
+	# $(rm_i)
 	@clear && echo "==Clean_Images_&_Containers=="
 
 re: fclean all
 
-.PHONY: all fclean clean  rm_i rm_c ps stop
+.PHONY: all fclean clean  rm_i rm_c rm_v ps stop

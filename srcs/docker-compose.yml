@@ -24,7 +24,9 @@ services:
 
 volumes:
   wp:
+#   name: volim
 
 networks:
   wordpress-network:
     driver: bridge
+#   name: wordpress-network

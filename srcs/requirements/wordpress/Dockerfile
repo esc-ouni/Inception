@@ -1,36 +1,37 @@
 FROM debian:12
 
 # Install dependencies
+# RUN apt-get update -y\
+#  && apt-get upgrade -y\
+#  && apt install unzip -y\
+#  && apt install php-fpm -y 
+
 RUN apt-get update && apt-get install -y \
     php-fpm \
     php-mysql \
     wget \
     unzip \
-    curl \
-    && apt-get clean 
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# Download WordPress
-    # && tar -xzf wordpress.tar.gz -C /var/www/ 
-    # && rm wordpress.tar.gz 
-    # && chown -R www-data:www-data /var/www/wordpress
+ADD https://wordpress.org/latest.tar.gz /var/www/html/
 
-# Copy WordPress configuration
-# COPY wp-config.php /var/www/wordpress
+# RUN && unzip latest.tar.gz -d /var/www/html/ \
+#     && chown -R www-data:www-data /var/www/html/wordpress
 
-# Adjust PHP-FPM configuration to listen on a socket or network port
-# RUN sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/' /etc/php/7.4/fpm/pool.d/www.conf
+RUN wget https://wordpress.org/latest.zip \
+    && unzip latest.zip -d /var/www/html/ \
+    && rm latest.zip \
+    && chown -R www-data:www-data /var/www/html/wordpress
 
-# Expose the port PHP-FPM listens on
+# WORKDIR /
 
+# COPY script.sh .
 
-# Start PHP-FPM
+# RUN chmod u=rwx script.sh
 
-WORKDIR /var/www/html 
+RUN sed -i 's/listen = \/run\/php\/php8.2-fpm.sock/listen = 9000/' /etc/php/8.2/fpm/pool.d/www.conf
 
+EXPOSE 9000
 
-COPY *.sh .
-
-RUN chmod +x script.sh
-CMD ["sh", "-c", "while true; do sleep 1; done"]
-#ENTRYPOINT  ["sh ", "script.sh"]
-
+CMD ["php-fpm8.2", "-F"]
