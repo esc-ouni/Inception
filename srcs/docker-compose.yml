@@ -1,32 +1,52 @@
-version: '3.8'
+version: "3.8"
+
 services:
+
   nginx:
     container_name: nginx
     build: ./srcs/requirements/nginx
     ports:
-      - 443:443
-    volumes:
-      - wp:/var/www/html
+      - "443:443"
+    depends_on:
+      - wordpress
     restart: on-failure
 
-    networks:
-      - wordpress-network
-  
+
+  mariadb:
+    container_name: mariadb
+    build: ./srcs/requirements/mariadb
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
   wordpress:
     container_name: wordpress
     build: ./srcs/requirements/wordpress
-    volumes:
-      - wp:/var/www/html
+    depends_on:
+      - mariadb
+    ports:
+      - "8000:80"
     restart: on-failure
-
-    networks:
-      - wordpress-network
+    environment:
+      WORDPRESS_DB_HOST: mariadb:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wordpress_data:/var/www/html
 
 volumes:
-  wp:
-#   name: volim
+  db_data:
+  wordpress_data:
 
-networks:
-  wordpress-network:
-    driver: bridge
+# networks:
+#   wordpress-network:
+#     driver: bridge
 #   name: wordpress-network
+
+

@@ -12,7 +12,5 @@ COPY ./nginx.conf /etc/nginx/conf.d
 
 EXPOSE 443
 
-# CMD ["nginx"]
-ENTRYPOINT [ "nginx", "-g" ]
-# CMD ["ps -a"]
+ENTRYPOINT [ "nginx", "-g"]
 CMD ["daemon off;"]
