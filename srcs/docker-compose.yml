@@ -17,6 +17,8 @@ services:
     build: ./srcs/requirements/mariadb
     volumes:
       - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
     restart: on-failure
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
@@ -30,7 +32,7 @@ services:
     depends_on:
       - mariadb
     ports:
-      - "8000:80"
+      - "8000:9000"
     restart: on-failure
     environment:
       WORDPRESS_DB_HOST: mariadb:3306
