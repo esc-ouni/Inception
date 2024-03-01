@@ -2,10 +2,12 @@ version: "3.8"
 services:
 
   wordpress:
-    image: wordpress
-    restart: always
+    build: ./requirements/wordpress/
+    image: wordpress:ppp
+    container_name: wordpressAAA
+    restart: on-failure
     ports:
-      - 8080:80
+      - 444:80
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: exampleuser
@@ -15,8 +17,10 @@ services:
       - wordpress:/var/www/html
 
   db:
-    image: mariadb
-    restart: always
+    build: ./requirements/mariadb/
+    image: maria:ppp
+    container_name: MARIAAAA
+    restart: on-failure
     environment:
       MYSQL_DATABASE: exampledb
       MYSQL_USER: exampleuser
