@@ -32,3 +32,6 @@ services:
 volumes:
   wordpress:
   db:
+
+
+# wp-config.php
