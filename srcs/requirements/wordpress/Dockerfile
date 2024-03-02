@@ -1,11 +1,25 @@
 FROM debian:12
 
-RUN apt-get update -y\
- && apt-get upgrade -y\
- && apt-get install php-fpm -y\
- && apt-get install php-mysql -y\
- && apt-get install curl -y
+ADD https://wordpress.org/wordpress-6.4.3.zip .
 
-# COPY script.sh .
+RUN apt update -y\
+ && apt upgrade -y\
+ && apt install wget -y\
+ && apt install php -y\
+ && apt install php-fpm -y\
+ && apt install php-mysql -y\
+ && apt install mariadb-client -y\
+ && apt install unzip -y\
+ && unzip -q wordpress-6.4.3.zip -d /var/www\
+ && rm -rf wordpress-6.4.3.zip
 
-# RUN ["bash", "script.sh"]
+# RUN		chown -R root:root /var/www/wordpress
+
+COPY ./tools/script.sh .
+
+# ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /usr/local/bin/wp
+
+# RUN chmod u=rwx script.sh\
+#  && bash script.sh
+
+CMD [ "/usr/sbin/php-fpm8.2", "-F" ]

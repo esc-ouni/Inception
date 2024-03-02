@@ -17,7 +17,7 @@ services:
     container_name: wordpress
     build: ./srcs/requirements/wordpress
     ports:
-      - "8000:9000"
+      - "9000:9000"
     depends_on:
       - mariadb
     # volumes:
