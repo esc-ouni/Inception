@@ -10,47 +10,47 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - /Users/idouni/Desktop/HTML:/var/www/html
+      - /Users/idouni/Desktop/HTML:/var/www/html #WordPress:-
     restart: on-failure
 
+  wordpress:
+    container_name: wordpress
+    build: ./srcs/requirements/wordpress
+    ports:
+      - "8000:9000"
+    depends_on:
+      - mariadb
+    # volumes:
+    #   - /Users/idouni/Desktop/HTML:/var/www/html #WordPress:-
+    restart: on-failure
+
+    environment:
+      WORDPRESS_DB_HOST: mariadb:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
 
   mariadb:
     container_name: mariadb
     build: ./srcs/requirements/mariadb
-    volumes:
-      - db_data:/var/lib/mysql
     ports:
       - "3306:3306"
+    volumes:
+      - DB:/var/lib/mysql
     restart: on-failure
+
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
 
-  wordpress:
-    container_name: wordpress
-    build: ./srcs/requirements/wordpress
-    depends_on:
-      - mariadb
-    ports:
-      - "8000:9000"
-    restart: on-failure
-    environment:
-      WORDPRESS_DB_HOST: mariadb:3306
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_DB_NAME: wordpress
-    volumes:
-      - wordpress_data:/var/www/html
-
 volumes:
-  db_data:
-  wordpress_data:
+  DB:
+  WordPress:
 
 # networks:
-#   wordpress-network:
-#     driver: bridge
-#   name: wordpress-network
+#   inception-network:
+#   name: inception-network
 
 
