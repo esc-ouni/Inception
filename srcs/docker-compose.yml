@@ -9,6 +9,8 @@ services:
       - "443:443"
     depends_on:
       - wordpress
+    volumes:
+      - /Users/idouni/Desktop/HTML:/var/www/html
     restart: on-failure
 
 
