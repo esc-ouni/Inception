@@ -4,6 +4,17 @@ RUN apt update -y\
  && apt upgrade -y\
  && apt install mariadb-server -y
 
- COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
- CMD [ "mysqld_safe" ]
+# COPY ./tools/script.sh /tmp
+
+# RUN chmod u=rwx /tmp/script.sh\
+#  && sh /tmp/script.sh
+
+COPY ./tools/script.sh /tmp
+
+RUN chmod u=rwx /tmp/script.sh
+
+RUN sh /tmp/script.sh
+
+CMD [ "mysqld_safe" ]

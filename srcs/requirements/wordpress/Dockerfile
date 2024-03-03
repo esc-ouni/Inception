@@ -1,6 +1,7 @@
 FROM debian:12
 
-ADD https://wordpress.org/wordpress-6.4.3.zip .
+ADD https://wordpress.org/wordpress-6.4.3.zip /tmp/
+ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /usr/local/bin/wp
 
 RUN apt update -y\
  && apt upgrade -y\
@@ -16,9 +17,10 @@ RUN apt update -y\
 
 COPY ./tools/script.sh /tmp
 
-# ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /usr/local/bin/wp
+WORKDIR /var/www/wordpress/
 
 RUN chmod u=rwx /tmp/script.sh\
+ && chmod u=rwx /usr/local/bin/wp\
  && sh /tmp/script.sh
 
 CMD [ "/usr/sbin/php-fpm8.2", "-F" ]
