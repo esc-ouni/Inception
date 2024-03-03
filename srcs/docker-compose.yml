@@ -55,6 +55,10 @@ volumes:
   DB:
   WordPress:
 
+# volumes:
+#   WordPress_website_files:
+#   WordPress_database:
+
 networks:
   inception-network:
     name : inception-network

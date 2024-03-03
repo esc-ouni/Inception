@@ -10,9 +10,7 @@ RUN apt update -y\
  && apt install php-fpm -y\
  && apt install php-mysql -y\
  && apt install mariadb-client -y\
- && apt install unzip -y\
- && unzip -q wordpress-6.4.3.zip -d /var/www\
- && rm -rf wordpress-6.4.3.zip
+ && apt install unzip -y
 
 # RUN		chown -R root:root /var/www/wordpress
 
@@ -20,7 +18,7 @@ COPY ./tools/script.sh /tmp
 
 # ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /usr/local/bin/wp
 
-RUN chmod u=rwx /tmp/script.sh
-RUN sh /tmp/script.sh
+RUN chmod u=rwx /tmp/script.sh\
+ && sh /tmp/script.sh
 
 CMD [ "/usr/sbin/php-fpm8.2", "-F" ]
