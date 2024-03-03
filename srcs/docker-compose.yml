@@ -10,7 +10,7 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - /Users/idouni/Desktop/HTML:/var/www/html #WordPress:-
+      - /Users/idouni/Desktop/Inception/HTML:/var/www/html #WordPress:-
     restart: on-failure
 
   wordpress:
@@ -21,7 +21,7 @@ services:
     depends_on:
       - mariadb
     # volumes:
-    #   - /Users/idouni/Desktop/HTML:/var/www/html #WordPress:-
+    #   - /Users/idouni/Desktop/Inception/HTML:/var/www/html #WordPress:-
     restart: on-failure
 
     environment:
