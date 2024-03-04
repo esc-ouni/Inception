@@ -8,6 +8,8 @@ sed -i 's/\;clear_env = no/clear_env = no/g' /etc/php/8.2/fpm/pool.d/www.conf
 
 echo "\nlisten=wordpress:9000" >> /etc/php/8.2/fpm/pool.d/www.conf
 
+# mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php #testt
+
 # dB
 
 sleep 10

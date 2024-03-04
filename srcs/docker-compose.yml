@@ -10,7 +10,7 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - /Users/idouni/Desktop/Inception/HTML:/var/www/html #WordPress:-
+      - WordPress:/var/www/html #WordPress:
     restart: on-failure
     networks:
       - inception-network
@@ -23,16 +23,12 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - /Users/idouni/Desktop/Inception/HTML:/var/www/html #WordPress:-
+      - WordPress:/var/www/html #WordPress:
     restart: on-failure
     networks:
       - inception-network
-
-    environment:
-      WORDPRESS_DB_HOST: mariadb:3306
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_DB_NAME: wordpress
+    env_file:
+      - ./.env
 
   mariadb:
     container_name: mariadb
@@ -40,24 +36,16 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - DB:/var/lib/mysql
+      - DB:/var/lib/mysql #DB:
     restart: on-failure
     networks:
       - inception-network
+    env_file:
+      - ./.env
 
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
-
-volumes:
+volumes:     #/home/idouni/data/
   DB:
-  WordPress:
-
-# volumes:
-#   WordPress_website_files:
-#   WordPress_database:
+  WordPress:    
 
 networks:
   inception-network:
