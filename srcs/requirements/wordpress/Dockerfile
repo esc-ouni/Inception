@@ -7,8 +7,8 @@ RUN apt update -y\
  && apt upgrade -y\
  && apt install vim -y\
  && apt install wget -y\
- && apt install php -y\
- && apt install php-fpm -y\
+ && apt install php8.2 -y\
+ && apt install php8.2-fpm -y\
  && apt install php-mysql -y\
  && apt install mariadb-client -y\
  && apt install unzip -y
