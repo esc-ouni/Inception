@@ -2,6 +2,7 @@ FROM debian:12
 
 RUN apt update -y\
  && apt upgrade -y\
+ && apt install netcat-traditional -y\
  && apt install nginx openssl -y
 
 WORKDIR /etc/nginx/openssl/
@@ -11,7 +12,7 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx.key -out n
 COPY ./conf/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 RUN chmod u=rwx /var/www/html\
- && chown -R www-data:www-data /var/www/html
+ && chown -R www-data:www-data /var/www/html/
 
 EXPOSE 443
 
