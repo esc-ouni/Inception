@@ -1,19 +1,17 @@
 #!/bin/bash
 
-# service mysql start;
+mysqld_safe &
 
-# mysql -e "CREATE DATABASE IF NOT EXISTS '${MYSQL_DATABASE}';"
+mariadb -u root <<EOF
+CREATE DATABASE $MYSQL_DATABASE;
+CREATE USER $MYSQL_USER@'%' IDENTIFIED BY '$MYSQL_USER_PASSWORD';
+GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO $MYSQL_USER@'%';
+FLUSH PRIVILEGES;
+EOF
 
-# mysql -e "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';"
+mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';"
+mysqladmin -u root -p$MYSQL_ROOT_PASSWORD shutdown
 
-# mysql -e "GRANT ALL PRIVILEGES ON '${MYSQL_DATABASE}'.* TO '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
-
-# mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
-
-# mysql -e "FLUSH PRIVILEGES;"
-
-# mysqladmin -u root -p$MYSQL_ROOT_PASSWORD shutdown
+# mysqld_safe
 
 echo "=> DATA_BASEEEEEE"
-
-
