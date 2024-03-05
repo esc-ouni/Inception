@@ -1,6 +1,5 @@
 FROM debian:12
 
-# ADD https://wordpress.org/wordpress-6.4.3.zip /tmp/
 ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /usr/local/bin/wp
 
 RUN apt update -y\
@@ -14,13 +13,11 @@ RUN apt update -y\
  && apt install mariadb-client -y\
  && apt install unzip -y
 
-COPY ./tools/script.sh /tmp
+COPY    ./tools/script.sh /tmp
 
-WORKDIR /var/www/wordpress/
+WORKDIR /var/www/html/
 
 RUN chmod u=rwx /tmp/script.sh\
- && chmod u=rwx /usr/local/bin/wp\
-#  && sh /tmp/script.sh\
- && chown -R root:root /var/www/wordpress
+ && chmod u=rwx /usr/local/bin/wp
 
 CMD [ "sh", "/tmp/script.sh" ]

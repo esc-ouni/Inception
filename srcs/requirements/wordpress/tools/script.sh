@@ -1,35 +1,20 @@
 #!/bin/bash
 
-# unzip -q /tmp/wordpress-6.4.3.zip -d /var/www
-
-# cp -rf /var/www/wordpress/* /var/www/html/. #WHYYY
-
 sed -i 's/\;clear_env = no/clear_env = no/g' /etc/php/8.2/fpm/pool.d/www.conf
 
 echo "\nlisten=wordpress:9000" >> /etc/php/8.2/fpm/pool.d/www.conf
 
-# cp -rf /var/www/html/wp-config-sample.php /var/www/html/wp-config.php #when_db_ready
-
-# dBase
-
 sleep 10
 
-cd /var/www/html
+wp core download --locale=en_US --allow-root 
 
-wp core download --allow-root 
+wp config create --allow-root --dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --dbhost=mariadb:3306
 
-# cp wp-config-sample.php wp-config.php
+wp core install --allow-root --url=$DOMAIN_NAME --title=INCEPTION --admin_user=$MYSQL_USER --admin_password=$MYSQL_PASSWORD --admin_email=email --path=/var/www/html
 
-# wp config set SERVER_PORT 3306 --allow-root
-# wp config set DB_NAME $MYSQL_DATABASE --allow-root --path=/var/www/html
-# wp config set DB_USER $MYSQL_USER --allow-root --path=/var/www/html
-# wp config set DB_PASSWORD $MYSQL_PASSWORD --allow-root --path=/var/www/html
-# wp config set DB_HOST 'mariadb:3306' --allow-root --path=/var/www/html
-wp config  --allow-root  create --dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --dbhost=mariadb:3306
-wp core install --url=$DOMAIN_NAME --title=INCEPTION --admin_user=$MYSQL_USER --admin_password=$MYSQL_PASSWORD --admin_email=email --allow-root --path=/var/www/html
-wp user create $MYSQL_USER email --role=author --user_pass=$MYSQL_PASSWORD --allow-root --path=/var/www/html
-
-# rm -rf /tmp/*
+wp user create --allow-root $MYSQL_USER email --role=author --user_pass=$MYSQL_PASSWORD --path=/var/www/html
 
 php-fpm8.2 -F
+
+sleep 10
 					
