@@ -4,7 +4,7 @@ services:
 
   nginx:
     container_name: nginx
-    build: ./srcs/requirements/nginx
+    build: ./requirements/nginx
     ports:
       - "443:443"
     depends_on:
@@ -17,9 +17,7 @@ services:
 
   wordpress:
     container_name: wordpress
-    build: ./srcs/requirements/wordpress
-    ports:
-      - "9000:9000"
+    build: ./requirements/wordpress
     depends_on:
       - mariadb
     volumes:
@@ -32,11 +30,9 @@ services:
 
   mariadb:
     container_name: mariadb
-    build: ./srcs/requirements/mariadb
-    ports:
-      - "3306:3306"
+    build: ./requirements/mariadb
     volumes:
-      - DB:/var/lib/mysql #DB:
+      - DB:/var/lib/mysql
     restart: on-failure
     networks:
       - inception-network

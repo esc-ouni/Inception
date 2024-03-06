@@ -40,7 +40,7 @@ fclean: rm_c rm_i rm_v
 	@clear && echo "==Clean_Images_&_Containers=="
 
 reboot:
-	docker system prune -f
+	docker system prune -af
 
 re: fclean all
 
