@@ -4,8 +4,8 @@ services:
 
   nginx:
     container_name: nginx
-    image: nginx:v1.0.0
     build: ./requirements/nginx
+    image: nginx:v1.0.0
     ports:
       - "443:443"
     depends_on:
@@ -18,8 +18,8 @@ services:
 
   wordpress:
     container_name: wordpress
-    image: wordpress:v1.0.0
     build: ./requirements/wordpress
+    image: wordpress:v1.0.0
     depends_on:
       - mariadb
     volumes:
@@ -32,8 +32,8 @@ services:
 
   mariadb:
     container_name: mariadb
-    image: mariadb:v1.0.0
     build: ./requirements/mariadb
+    image: mariadb:v1.0.0
     volumes:
       - DB:/var/lib/mysql
     restart: on-failure
