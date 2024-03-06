@@ -8,8 +8,9 @@ wp core download --locale=en_US --allow-root
 
 wp config create --allow-root --dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --dbhost=mariadb:3306
 
-wp core install --allow-root --url=$DOMAIN_NAME --title=INCEPTION --admin_user=$MYSQL_USER --admin_password=$MYSQL_PASSWORD --admin_email=email --path=/var/www/html
+wp core install --url=$DOMAIN_NAME --title=INCEPTION --admin_user=$ADMIN_USR --admin_password=$ADMIN_PSW --admin_email=$ADMIN_EMAIL --allow-root --path=/var/www/html
 
-wp user create --allow-root $MYSQL_USER email --role=author --user_pass=$MYSQL_PASSWORD --path=/var/www/html
+wp user create $USER_USR $USER_EMAIL --role=author --user_pass=$USER_PSW --allow-root --path=/var/www/html
+
 
 php-fpm8.2 -F
