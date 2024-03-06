@@ -12,16 +12,16 @@
 
 all:
 	@clear && echo "==Start======================"
-	docker-compose -f ./srcs/docker-compose.yml up -d
+	docker compose -f ./srcs/docker-compose.yml up -d
 	@echo "==Done======================="
 
 stop:
-	docker-compose -f ./srcs/docker-compose.yml stop
+	docker compose -f ./srcs/docker-compose.yml stop
 	@clear && echo "==Stop======================="
 
 ps:
 	@clear && echo "==Stat======================="
-	docker-compose -f ./srcs/docker-compose.yml ps -a
+	docker compose -f ./srcs/docker-compose.yml ps -a
 
 rm_i:
 	@docker rmi -f ${shell docker image ls -aq} || echo "Nothing_to_delete"
@@ -36,7 +36,7 @@ clean: rm_c rm_i rm_v
 	@clear && echo "==Clean_Containers==============="
 
 fclean: rm_c rm_i rm_v
-	docker-compose -f ./srcs/docker-compose.yml down
+	docker compose -f ./srcs/docker-compose.yml down
 	@clear && echo "==Clean_Images_&_Containers=="
 
 reboot:
