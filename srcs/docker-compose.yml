@@ -48,4 +48,5 @@ volumes:     #/home/idouni/data/
 
 networks:
   inception-network:
+    driver : bridge
     name : inception-network
