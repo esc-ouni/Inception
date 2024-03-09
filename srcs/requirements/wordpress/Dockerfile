@@ -20,4 +20,6 @@ WORKDIR /var/www/html/
 RUN chmod u=rwx /tmp/script.sh\
  && chmod u=rwx /usr/local/bin/wp
 
+EXPOSE 9000
+
 CMD [ "sh", "/tmp/script.sh" ]

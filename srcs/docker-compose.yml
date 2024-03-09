@@ -44,7 +44,9 @@ services:
 
 volumes:     #/home/idouni/data/
   DB:
-  WordPress:    
+    name : DB
+  WordPress:
+    name : WordPress    
 
 networks:
   inception-network:
