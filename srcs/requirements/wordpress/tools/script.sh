@@ -10,6 +10,8 @@ wp config create --allow-root --dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER --db
 
 wp core install --url=$DOMAIN_NAME --title=INCEPTION --admin_user=$ADMIN_USR --admin_password=$ADMIN_PSW --admin_email=$ADMIN_EMAIL --allow-root --path=/var/www/html
 
-wp user create $USER_USR $USER_EMAIL --role=author --user_pass=$USER_PSW --allow-root --path=/var/www/html
+# wp user create $USER_USR $USER_EMAIL --role=author --user_pass=$USER_PSW --allow-root --path=/var/www/html
+
+wp user create $USER_USR $USER_EMAIL --role=Bios --user_pass=$USER_PSW --allow-root --path=/var/www/html
 
 php-fpm8.2 -F
