@@ -6,10 +6,10 @@ RUN apt update -y\
 
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
-COPY ./tools/script.sh /tmp
+COPY ./tools/setup.bash /tmp
 
-RUN chmod u=rwx /tmp/script.sh
+RUN chmod u=rwx /tmp/setup.bash
 
 EXPOSE 3306 
 
-CMD [ "sh", "/tmp/script.sh" ]
+CMD [ "bash", "/tmp/setup.bash" ]

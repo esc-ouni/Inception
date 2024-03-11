@@ -9,13 +9,13 @@ RUN apt update -y\
  && apt install php-mysql -y\
  && apt install mariadb-client -y
 
-COPY    ./tools/script.sh /tmp
+COPY    ./tools/setup.bash /tmp
 
 WORKDIR /var/www/html/
 
-RUN chmod u=rwx /tmp/script.sh\
+RUN chmod u=rwx /tmp/setup.bash\
  && chmod u=rwx /usr/local/bin/wp
 
 EXPOSE 9000
 
-CMD [ "sh", "/tmp/script.sh" ]
+CMD [ "bash", "/tmp/setup.bash" ]
