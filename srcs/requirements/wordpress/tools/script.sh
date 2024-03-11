@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sed -i 's/\;clear_env = no/clear_env = no/g' /etc/php/8.2/fpm/pool.d/www.conf
-
 sed -i 's!listen = /run/php/php8.2-fpm.sock!listen=wordpress:9000!g' /etc/php/8.2/fpm/pool.d/www.conf
 
 wp core download --locale=en_US --allow-root 

@@ -2,7 +2,6 @@ FROM debian:12
 
 RUN apt update -y\
  && apt upgrade -y\
- && apt install netcat-traditional -y\
  && apt install nginx openssl -y
 
 WORKDIR /etc/nginx/openssl/
