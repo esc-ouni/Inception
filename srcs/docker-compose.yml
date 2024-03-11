@@ -42,6 +42,13 @@ services:
     env_file:
       - ./.env
 
+
+    # driver: local
+    # driver_opts:
+    #    o: bind
+    #    type: none
+    #    device: /home/idabligi/Desktop/data/WP
+
 volumes:     #/home/idouni/data/
   DB:
     name : DB
@@ -50,5 +57,4 @@ volumes:     #/home/idouni/data/
 
 networks:
   inception-network:
-    driver : bridge
     name : inception-network
