@@ -5,7 +5,7 @@ services:
   nginx:
     container_name: nginx
     build: ./requirements/nginx
-    image: nginx:v1.0.0
+    image: nginx:v1.0 
     ports:
       - "443:443"
     depends_on:
@@ -19,7 +19,7 @@ services:
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress
-    image: wordpress:v1.0.0
+    image: wordpress:v1.0 
     depends_on:
       - mariadb
     volumes:
@@ -33,7 +33,7 @@ services:
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb
-    image: mariadb:v1.0.0
+    image: mariadb:v1.0 
     volumes:
       - DB:/var/lib/mysql
     restart: on-failure
@@ -42,18 +42,22 @@ services:
     env_file:
       - ./.env
 
-
-    # driver: local
-    # driver_opts:
-    #    o: bind
-    #    type: none
-    #    device: /home/idabligi/Desktop/data/WP
-
-volumes:     #/home/idouni/data/
+volumes:
   DB:
     name : DB
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /Users/idouni/data/DB
+
   WordPress:
-    name : WordPress    
+    name : WordPress
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /Users/idouni/data/WordPress
 
 networks:
   inception-network:
