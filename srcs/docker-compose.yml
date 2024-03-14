@@ -45,18 +45,16 @@ services:
 volumes:
   DB:
     name : DB
-    driver: local
     driver_opts:
-      o: bind
-      type: none
+      type : none
+      o    : bind
       device:  /home/idouni/data/DB
 
   WordPress:
     name : WordPress
-    driver: local
     driver_opts:
-      o: bind
-      type: none
+      type : none
+      o    : bind
       device:  /home/idouni/data/WordPress
 
 networks:
