@@ -49,7 +49,7 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /Users/idouni/data/DB
+      device:  /home/idouni/data/DB
 
   WordPress:
     name : WordPress
@@ -57,7 +57,7 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /Users/idouni/data/WordPress
+      device:  /home/idouni/data/WordPress
 
 networks:
   inception-network:
