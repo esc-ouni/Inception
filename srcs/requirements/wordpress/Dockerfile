@@ -6,8 +6,8 @@ RUN apt update -y\
  && apt upgrade -y\
  && apt install php7.4 -y\
  && apt install php7.4-fpm -y\
- && apt install php-mysql -y\
- && apt install mariadb-client -y
+ && apt install php-mysql -y
+#  && apt install mariadb-client -y
 
 COPY    ./tools/setup.bash /tmp
 
