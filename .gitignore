@@ -2,3 +2,5 @@
 ./srcs/.DS_Store
 ./srcs/*/.DS_Store
 .DS_Store
+./srcs/requirements/wordpress/conf/.gitkeep
+./srcs/requirements/nginx/tools/.gitkeep
