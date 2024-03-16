@@ -46,16 +46,16 @@ volumes:
   DB:
     name : DB
     driver_opts:
-      type : none
-      o    : bind
-      device:  /home/idouni/data/DB
+      type  : none
+      o     : bind
+      device: /home/idouni/data/DB
 
   WordPress:
     name : WordPress
     driver_opts:
-      type : none
-      o    : bind
-      device:  /home/idouni/data/WordPress
+      type  : none
+      o     : bind
+      device: /home/idouni/data/WordPress
 
 networks:
   inception-network:
