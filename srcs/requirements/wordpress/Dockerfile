@@ -4,8 +4,8 @@ ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /u
 
 RUN apt update -y\
  && apt upgrade -y\
- && apt install php8.2 -y\
- && apt install php8.2-fpm -y\
+ && apt install php7.4 -y\
+ && apt install php7.4-fpm -y\
  && apt install php-mysql -y\
  && apt install mariadb-client -y
 

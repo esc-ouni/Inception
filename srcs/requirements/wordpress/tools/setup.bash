@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sed -i 's!listen = /run/php/php8.2-fpm.sock!listen=wordpress:9000!g' /etc/php/8.2/fpm/pool.d/www.conf
+sed -i 's!listen = /run/php/php7.4-fpm.sock!listen=wordpress:9000!g' /etc/php/7.4/fpm/pool.d/www.conf
 
 wp core download --locale=en_US --allow-root 
 
@@ -10,4 +10,4 @@ wp core install --url=$DOMAIN_NAME --title=INCEPTION --admin_user=$ADMIN_USR --a
 
 wp user create $USER_USR $USER_EMAIL --role=author --user_pass=$USER_PSW --allow-root
 
-php-fpm8.2 -F
+php-fpm7.4 -F
