@@ -2,6 +2,10 @@
 
 sed -i 's!listen = /run/php/php7.4-fpm.sock!listen=wordpress:9000!g' /etc/php/7.4/fpm/pool.d/www.conf
 
+mkdir /run/php/
+
+touch /run/php/php7.4-fpm.pid
+
 wp core download --locale=en_US --allow-root 
 
 wp config create --dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --dbhost=mariadb:3306 --allow-root
