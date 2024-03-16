@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:11
 
 ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /usr/local/bin/wp
 
