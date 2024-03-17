@@ -12,7 +12,7 @@
 
 all:
 	@clear && echo "==Start======================"
-	docker compose -f ./srcs/docker-compose.yml up --build 
+	docker compose -f ./srcs/docker-compose.yml up --build -d
 	@echo "==Done======================="
 
 stop:
